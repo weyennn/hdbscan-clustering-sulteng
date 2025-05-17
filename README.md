@@ -19,7 +19,7 @@ Data bersumber dari BPS (Badan Pusat Statistik) dan mencakup 13 kabupaten/kota d
 
 ## 3. Metodologi
 
-- Preprocessing: normalisasi data menggunakan MinMaxScaler / StandardScaler
+- Preprocessing: normalisasi data menggunakan StandardScaler
 - Clustering: menggunakan algoritma **HDBSCAN**
 - Visualisasi: PCA 2D + pemetaan hasil klaster pada shapefile
 - Tools: Python (Pandas, Scikit-learn, HDBSCAN, GeoPandas, Matplotlib)
