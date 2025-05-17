@@ -84,5 +84,5 @@ segmentasi-daerah-sulteng/
 
 ---
 
-> Dibuat oleh: Yayang Matira
+> Dibuat oleh: Yayang Matira |
 > Proyek eksploratif berbasis data spasial dan sosial ekonomi untuk Sulawesi Tengah
