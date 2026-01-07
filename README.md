@@ -1,69 +1,115 @@
 
-# Segmentasi Wilayah Sulawesi Tengah dengan HDBSCAN
+# Segmentasi Wilayah Sosial Ekonomi di Sulawesi Tengah
 
-Proyek ini bertujuan untuk mengelompokkan kabupaten/kota di Provinsi Sulawesi Tengah berdasarkan indikator sosial ekonomi dari BPS, guna memberikan dasar rekomendasi kebijakan yang lebih tepat sasaran.
+## Latar Belakang Masalah
+Kabupaten/kota di Provinsi Sulawesi Tengah memiliki karakteristik sosial ekonomi
+yang beragam. Penerapan kebijakan pembangunan yang seragam berpotensi tidak
+tepat sasaran karena perbedaan tingkat kesejahteraan, pendidikan, dan kondisi ekonomi
+antar wilayah.
 
-## 1. Latar Belakang
-Wilayah Sulawesi Tengah memiliki karakteristik sosial ekonomi yang beragam. Untuk mendukung kebijakan pembangunan yang inklusif dan berbasis data, diperlukan segmentasi wilayah secara objektif. Klasterisasi ini menggunakan pendekatan HDBSCAN agar mampu mengidentifikasi pola tanpa memaksakan jumlah klaster tetap.
+Proyek ini bertujuan untuk melakukan segmentasi kabupaten/kota di Sulawesi Tengah
+berdasarkan indikator sosial ekonomi guna mendukung analisis pembangunan daerah
+dan perumusan kebijakan berbasis data yang lebih terarah.
 
-## 2. Dataset
-Data bersumber dari BPS (Badan Pusat Statistik) dan mencakup 13 kabupaten/kota di Sulawesi Tengah. Indikator yang digunakan:
+---
 
-- Umur Harapan Hidup (AHH)
-- Rata-rata Lama Sekolah (RLS)
-- Harapan Lama Sekolah (HLS)
-- Pengeluaran Per Kapita
-- Persentase Penduduk Miskin
-- Gini Rasio
-- Tingkat Pengangguran Terbuka (TPT)
+## Data
+- **Sumber:** Badan Pusat Statistik (BPS)
+- **Unit analisis:** 13 kabupaten/kota di Provinsi Sulawesi Tengah
+- **Indikator utama:**
+  - Umur Harapan Hidup (AHH)
+  - Rata-rata Lama Sekolah (RLS)
+  - Harapan Lama Sekolah (HLS)
+  - Pengeluaran per Kapita
+  - Persentase Penduduk Miskin
+  - Gini Rasio
+  - Tingkat Pengangguran Terbuka (TPT)
 
-## 3. Metodologi
+---
 
-- Preprocessing: normalisasi data menggunakan StandardScaler
-- Clustering: menggunakan algoritma **HDBSCAN**
-- Visualisasi: PCA 2D + pemetaan hasil klaster pada shapefile
-- Tools: Python (Pandas, Scikit-learn, HDBSCAN, GeoPandas, Matplotlib)
+## Pendekatan Analisis
 
-## 4. Hasil Ringkasan Per Klaster
+### 1. Eksplorasi dan Pra-pemrosesan Data
+- Analisis distribusi indikator sosial ekonomi antar wilayah
+- Normalisasi data menggunakan **StandardScaler** untuk menyetarakan skala variabel
 
-| Cluster | AHH | RLS | HLS | Pengeluaran | % Miskin | Gini | TPT | Jumlah Wilayah | Daftar Kabupaten |
-|---------|-----|-----|-----|-------------|----------|------|-----|----------------|------------------|
-| 0 | ... | ... | ... | ... | ... | ... | ... | 5 | buol, tojo una-una, ... |
-| 1 | ... | ... | ... | ... | ... | ... | ... | 7 | poso, morowali, sigi, ... |
-| -1 | ... | ... | ... | ... | ... | ... | ... | 1 | kota palu |
+### 2. Clustering Wilayah
+- Penerapan algoritma **HDBSCAN** untuk mengelompokkan wilayah berdasarkan
+  kemiripan karakteristik sosial ekonomi
+- Metode ini dipilih karena:
+  - Tidak memerlukan penentuan jumlah klaster di awal
+  - Mampu menangani perbedaan kepadatan data
+  - Dapat mengidentifikasi wilayah **outlier** secara otomatis
 
-> Ringkasan lengkap disimpan dalam: `data/processed/ringkasan_per_klaster.csv`
+### 3. Visualisasi
+- Proyeksi **PCA 2D** untuk membantu interpretasi hasil clustering
+- Pemetaan klaster pada peta administrasi wilayah Sulawesi Tengah
 
-## 5. Visualisasi
-- **PCA Scatter Plot**: menampilkan distribusi klaster dalam ruang 2D
-- **Peta Klastering**: kabupaten/kota diwarnai berdasarkan klaster hasil HDBSCAN (disimpan di `hasil/peta_klaster_sulteng.png`)
+---
 
-## 6. Interpretasi dan Rekomendasi Kebijakan
+## Hasil Segmentasi
+- Kabupaten/kota di Sulawesi Tengah terbagi ke dalam beberapa klaster
+  dengan karakteristik sosial ekonomi yang berbeda.
+- Sebagian wilayah membentuk klaster dengan capaian pembangunan relatif rendah,
+  sementara klaster lainnya menunjukkan kondisi sosial ekonomi yang lebih baik.
+- **Kota Palu** teridentifikasi sebagai **outlier**, dengan nilai indikator
+  yang jauh berbeda dibandingkan wilayah lainnya.
 
-### Cluster 0
-Wilayah dengan capaian pembangunan rendah. Perlu penguatan pada:
-- Pendidikan dasar dan vokasi
-- Infrastruktur kesehatan
-- Pengentasan kemiskinan
+Ringkasan kuantitatif per klaster disimpan pada:
+`data/processed/ringkasan_per_klaster.csv`
 
-### Cluster 1
-Wilayah transisi menuju maju. Potensial dikembangkan melalui:
-- Dukungan UKM dan ekonomi lokal
-- Digitalisasi pelayanan publik
-- Penguatan SDM dan pendidikan lanjut
+---
 
-### Outlier (Cluster -1)
-Kota Palu menunjukkan karakteristik sangat tinggi di semua indikator:
-- Cocok untuk pengembangan smart city
-- Perlu penanganan ketimpangan urban
-- Menjadi pusat inovasi regional
+## Insight Utama
+- Ketimpangan sosial ekonomi antar wilayah di Sulawesi Tengah membentuk
+  pola klaster yang jelas dan tidak bersifat acak.
+- Wilayah dengan karakteristik pembangunan serupa cenderung berada
+  dalam klaster yang sama.
+- Identifikasi outlier membantu mencegah distorsi analisis dan memberikan
+  pemahaman yang lebih akurat terhadap struktur wilayah.
 
-## 7. Struktur Folder
+---
+
+## Rekomendasi Kebijakan
+
+### Klaster dengan Pembangunan Relatif Rendah
+- Prioritas pada peningkatan pendidikan dasar dan vokasi
+- Penguatan layanan kesehatan dan program pengentasan kemiskinan
+- Intervensi pembangunan berbasis kebutuhan lokal
+
+### Klaster Wilayah Transisi
+- Dukungan pengembangan UMKM dan ekonomi lokal
+- Digitalisasi layanan publik
+- Peningkatan kualitas sumber daya manusia
+
+### Wilayah Outlier (Kota Palu)
+- Potensi pengembangan sebagai pusat pertumbuhan dan inovasi regional
+- Fokus pada pengelolaan ketimpangan urban dan pembangunan berkelanjutan
+- Penguatan konsep smart city dan layanan perkotaan
+
+---
+
+## Visualisasi
+- **PCA Scatter Plot** untuk distribusi klaster dalam ruang 2D
+- **Peta Klaster Wilayah** disimpan pada:
+  `hasil/peta_klaster_sulteng.png`
+
+---
+
+## Tools & Library
+- Python, Pandas, Scikit-learn
+- HDBSCAN
+- GeoPandas
+- Matplotlib, Seaborn
+
+---
+
+## Struktur Proyek
 ```
 segmentasi-daerah-sulteng/
 ├── data/
-│   ├── raw/                      # Dataset mentah
-│   ├── processed/               # Data normalisasi, clustering, ringkasan
+│   ├── raw/
+│   ├── processed/
 ├── src/
 │   ├── preprocessing.py
 │   ├── clustering_hdbscan.py
@@ -84,5 +130,8 @@ segmentasi-daerah-sulteng/
 
 ---
 
-> Dibuat oleh: Yayang Matira |
-> Proyek eksploratif berbasis data spasial dan sosial ekonomi untuk Sulawesi Tengah
+## Penulis
+
+Yayang Matira
+Mahasiswa Magister Ilmu Komputer
+Universitas Gadjah Mada
