@@ -132,6 +132,4 @@ segmentasi-daerah-sulteng/
 
 ## Penulis
 
-Yayang Matira
-Mahasiswa Magister Ilmu Komputer
-Universitas Gadjah Mada
+Yayang Matira | Mahasiswa Magister Ilmu Komputer | Universitas Gadjah Mada
